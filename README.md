@@ -1,18 +1,18 @@
-# Face Emotion Detection Web App Live
+# Real-Time Emotion Detection
 
-This is a simple web-based application that detects emotions from images using **face-api.js**. It leverages pre-trained deep learning models to analyze facial expressions and categorize them into emotions such as **happy**, **sad**, **surprised**, **angry**, and more.
+This is a simple web-based application that detects emotions from video feeds or images using **face-api.js**. It leverages pre-trained deep learning models to analyze facial expressions and categorize them into emotions such as **happy**, **sad**, **surprised**, **angry**, and more.
 
 ## Features
 
-- **Upload Image**: Upload an image from your device to detect emotions.
-- **Real-Time Emotion Detection**: Automatically detects the dominant emotion from the uploaded image.
-- **Multiple Emotions**: Displays the emotion with the highest confidence score.
+- **Real-Time Emotion Detection**: Detect emotions directly from the webcam feed.
+- **Multiple Emotions**: Displays the emotion with the highest confidence score and overlays detected faces on the video feed.
+- **Error Handling**: Provides a warning message if the webcam is unavailable or permission is denied.
 
 ## Technology Stack
 
 - **HTML5**: For the webpage structure.
 - **CSS3**: For styling the app.
-- **JavaScript**: For handling image processing and emotion detection.
+- **JavaScript**: For handling video feed and emotion detection logic.
 - **face-api.js**: A library for face detection and emotion recognition based on deep learning.
 
 ## Setup Instructions
