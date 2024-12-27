@@ -24,6 +24,7 @@ function startVideo() {
       video.srcObject = stream;
       video.classList.remove('hidden');
       warningMessage.classList.add('hidden');
+      video.play();
       detectEmotions();
     })
     .catch((error) => {
@@ -36,6 +37,11 @@ async function detectEmotions() {
   const video = document.getElementById('video');
   const canvas = document.getElementById('canvas');
   const emotionResult = document.getElementById('emotionResult');
+
+  video.addEventListener('loadedmetadata', () => {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+  });
 
   const displaySize = { width: video.videoWidth, height: video.videoHeight };
   faceapi.matchDimensions(canvas, displaySize);
