@@ -2,6 +2,8 @@
 
 This is a simple web-based application that detects emotions from video feeds or images using **face-api.js**. It leverages pre-trained deep learning models to analyze facial expressions and categorize them into emotions such as **happy**, **sad**, **surprised**, **angry**, and more.
 
+![Real-Time Emotion Detection](demo.jpg)
+
 ## Features
 
 - **Real-Time Emotion Detection**: Detect emotions directly from the webcam feed.
