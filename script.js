@@ -17,12 +17,18 @@ async function loadModels() {
 
 function startVideo() {
   const video = document.getElementById('video');
+  const warningMessage = document.getElementById('warningMessage');
+
   navigator.mediaDevices.getUserMedia({ video: true })
     .then((stream) => {
       video.srcObject = stream;
+      video.classList.remove('hidden');
+      warningMessage.classList.add('hidden');
+      detectEmotions();
     })
     .catch((error) => {
       console.error("Error accessing webcam:", error);
+      warningMessage.classList.remove('hidden');
     });
 }
 
@@ -30,9 +36,11 @@ async function detectEmotions() {
   const video = document.getElementById('video');
   const canvas = document.getElementById('canvas');
   const emotionResult = document.getElementById('emotionResult');
-  
+
   const displaySize = { width: video.videoWidth, height: video.videoHeight };
   faceapi.matchDimensions(canvas, displaySize);
+
+  canvas.classList.remove('hidden');
 
   setInterval(async () => {
     const detections = await faceapi.detectAllFaces(video)
@@ -40,7 +48,7 @@ async function detectEmotions() {
       .withFaceExpressions();
 
     const resizedDetections = faceapi.resizeResults(detections, displaySize);
-    
+
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     faceapi.draw.drawDetections(canvas, resizedDetections);
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
@@ -58,5 +66,4 @@ async function detectEmotions() {
 
 window.onload = async () => {
   await loadModels();
-  detectEmotions();
 };
