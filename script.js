@@ -41,37 +41,40 @@ async function detectEmotions() {
   video.addEventListener('loadedmetadata', () => {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
+      console.log("Canvas dimensions set:", canvas.width, canvas.height);
   });
 
-  const displaySize = { width: video.videoWidth, height: video.videoHeight };
-  faceapi.matchDimensions(canvas, displaySize);
+  const getDisplaySize = () => ({
+      width: video.videoWidth,
+      height: video.videoHeight,
+  });
 
   canvas.classList.remove('hidden');
 
   setInterval(async () => {
-    if (!video.videoWidth || !video.videoHeight) {
-        console.warn("Video dimensions are not available yet.");
-        return;
-    }
+      if (!video.videoWidth || !video.videoHeight) {
+          console.warn("Video dimensions are not yet available.");
+          return;
+      }
 
-    const detections = await faceapi.detectAllFaces(video)
-      .withFaceLandmarks()
-      .withFaceExpressions();
+      const detections = await faceapi.detectAllFaces(video)
+          .withFaceLandmarks()
+          .withFaceExpressions();
 
-    const resizedDetections = faceapi.resizeResults(detections, displaySize);
+      const resizedDetections = faceapi.resizeResults(detections, getDisplaySize());
 
-    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-    faceapi.draw.drawDetections(canvas, resizedDetections);
-    faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-    faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+      faceapi.draw.drawDetections(canvas, resizedDetections);
+      faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+      faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
 
-    if (detections[0]?.expressions) {
-      const expressions = detections[0].expressions;
-      const emotion = Object.entries(expressions).sort((a, b) => b[1] - a[1])[0];
-      emotionResult.innerText = `Detected Emotion: ${emotion[0]} (${Math.round(emotion[1] * 100)}%)`;
-    } else {
-      emotionResult.innerText = "No face detected.";
-    }
+      if (detections[0]?.expressions) {
+          const expressions = detections[0].expressions;
+          const emotion = Object.entries(expressions).sort((a, b) => b[1] - a[1])[0];
+          emotionResult.innerText = `Detected Emotion: ${emotion[0]} (${Math.round(emotion[1] * 100)}%)`;
+      } else {
+          emotionResult.innerText = "No face detected.";
+      }
   }, 100);
 }
 
