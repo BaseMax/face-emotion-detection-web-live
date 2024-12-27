@@ -75,7 +75,7 @@ async function detectEmotions() {
       } else {
           emotionResult.innerText = "No face detected.";
       }
-  }, 100);
+  }, 300);
 }
 
 window.onload = async () => {
