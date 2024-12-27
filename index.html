@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emotion Detection</title>
+  <title>Real-Time Emotion Detection</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <h1>Real-Time Emotion Detection</h1>
     <div id="loadingIndicator">Loading models...</div>
-    <video id="video" autoplay muted></video>
-    <canvas id="canvas"></canvas>
+    <div id="warningMessage" class="hidden">⚠️ Unable to access the camera. Please allow camera access or ensure your device has a working camera.</div>
+    <video id="video" autoplay muted class="hidden"></video>
+    <canvas id="canvas" class="hidden"></canvas>
     <div id="emotionResult"></div>
   </div>
 
