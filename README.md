@@ -95,9 +95,4 @@ If you would like to contribute to this project, feel free to fork the repositor
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-### Acknowledgments
-
-- face-api.js for providing pre-trained models for face detection and emotion recognition.
-- TensorFlow.js for powering various machine learning models.
-
 Copyright 2024, Max Base
