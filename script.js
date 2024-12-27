@@ -49,6 +49,11 @@ async function detectEmotions() {
   canvas.classList.remove('hidden');
 
   setInterval(async () => {
+    if (!video.videoWidth || !video.videoHeight) {
+        console.warn("Video dimensions are not available yet.");
+        return;
+    }
+
     const detections = await faceapi.detectAllFaces(video)
       .withFaceLandmarks()
       .withFaceExpressions();
